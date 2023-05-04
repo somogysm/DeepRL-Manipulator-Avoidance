@@ -1,0 +1,61 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  coordinateSystem "NUE"
+  randomSeed -1
+}
+Viewpoint {
+  orientation -0.571861175482501 0.8006148415253345 0.17885936236366165 0.7302677732703461
+  position 1.8982430587988688 2.7015675701087933 1.5785876175229687
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 10 10
+  floorAppearance Parquetry {
+    type "light strip"
+  }
+  wallHeight 0.5
+}
+DEF TARGET Solid {
+  translation 0.5 1.5 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+      }
+      geometry Sphere {
+        radius 0.05
+      }
+    }
+  ]
+}
+DEF OBSTACLE Solid {
+  translation 0.3 1.7 -0.4
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+      }
+      geometry Box {
+        size 0.4 0.3 0.1
+      }
+    }
+  ]
+  name "solid(1)"
+  locked TRUE
+}
+DEF supervisor Robot {
+  children [
+    Receiver {
+    }
+    Emitter {
+    }
+  ]
+  name "robot(1)"
+  controller "supervisorController"
+  supervisor TRUE
+}
