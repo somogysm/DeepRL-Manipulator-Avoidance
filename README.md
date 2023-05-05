@@ -1,7 +1,7 @@
 
-# Reinforcement Learning using Webots simulation
+# Deep Reinforcement Learning for Manipulator Object Avoidance Within Webots
 
-This repository uses Open AI Gym along with Webots phyisics simulation to control a 7 DOF Kinova manipulator robot path movement towards a desired goal with obstacle avoidance, using reinforcement learning.
+This repository uses Open AI Gym along with Webots phyisics simulation to control a 7 DOF Kinova manipulator robot path movement towards a desired goal with obstacle avoidance, using deep NAF reinforcement learning.
 
 ![](RL.gif)
 
