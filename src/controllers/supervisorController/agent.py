@@ -9,7 +9,7 @@ import torch.optim as optim
 import random
 
 class NAF_Agent():
-    """Interacts with and learns from the environment."""
+    """Interacts with and learns from the environment. Trains a deep NAF network to understand the environment, and acts accordingly."""
 
     def __init__(self,
                  state_size,
@@ -17,10 +17,9 @@ class NAF_Agent():
                  device,
                  args,
                  writer):
-        """Initialize an Agent object.
+        """Initialize the Agent object.
         
-        Params
-        ======
+        Attributes:
             state_size (int): dimension of each state
             action_size (int): dimension of each action
             Network (str): dqn network type
@@ -52,13 +51,10 @@ class NAF_Agent():
         self.last_action = None
 
         # Q-Network
-        if args.d2rl == 0:
-            self.qnetwork_local = NAF(state_size, action_size, args.layer_size, args.seed).to(device)
-            self.qnetwork_target = NAF(state_size, action_size, args.layer_size, args.seed).to(device)
-        else:
-            self.qnetwork_local = DeepNAF(state_size, action_size, args.layer_size, args.seed).to(device)
-            self.qnetwork_target = DeepNAF(state_size, action_size, args.layer_size, args.seed).to(device)
-        
+
+        self.qnetwork_local = DeepNAF(state_size, action_size, args.layer_size, args.seed).to(device)
+        self.qnetwork_target = DeepNAF(state_size, action_size, args.layer_size, args.seed).to(device)
+    
         #wandb.watch(self.qnetwork_local)
         self.writer = writer
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=args.learning_rate)
@@ -126,9 +122,11 @@ class NAF_Agent():
     def act(self, state):
         """Calculating the action
         
-        Params
-        ======
+        Args:
             state (array_like): current state
+        
+        Returns:
+            Action tensor to be acted upon
             
         """
 
@@ -144,9 +142,12 @@ class NAF_Agent():
 
     def learn(self, experiences):
         """Update value parameters using given batch of experience tuples.
-        Params
-        ======
+
+        Args:
             experiences (Tuple[torch.Tensor]): tuple of (s, a, r, s', done) tuples 
+        
+        Returns:
+            Current loss 
         """
 
         states, actions, rewards, next_states, dones = experiences
@@ -177,9 +178,13 @@ class NAF_Agent():
 
     def learn_per(self, experiences):
         """Update value parameters using given batch of experience tuples.
-        Params
-        ======
+        
+        Args:
+
             experiences (Tuple[torch.Tensor]): tuple of (s, a, r, s', done) tuples 
+
+        Returns:
+            Current loss
         """
         self.optimizer.zero_grad()
         states, actions, rewards, next_states, dones, idx, weights = experiences
@@ -220,8 +225,8 @@ class NAF_Agent():
     def soft_update(self, local_model, target_model):
         """Soft update model parameters.
         θ_target = τ*θ_local + (1 - τ)*θ_target
-        Params
-        ======
+
+        Args:
             local_model (PyTorch model): weights will be copied from
             target_model (PyTorch model): weights will be copied to
             tau (float): interpolation parameter 

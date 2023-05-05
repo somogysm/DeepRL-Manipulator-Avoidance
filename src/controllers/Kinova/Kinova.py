@@ -4,7 +4,7 @@ import ast
 from sklearn import preprocessing
 
 class KinovaRobot(RobotEmitterReceiverCSV):
-	"""Pepper Kinova robot Webots controller.
+	"""Kinova robot Webots controller.
 
 			Attributes:
 				self.numMotors: Number of motors, Int.
@@ -43,7 +43,7 @@ class KinovaRobot(RobotEmitterReceiverCSV):
 					None
 
 				Returns:
-					Desired message, contraining list of robot observations.
+					Desired message, containing list of robot observations.
 		"""
 		# Read the sensor value, convert to string and save it in a list
 		# Read the sensor value, convert to string and save it in a list
