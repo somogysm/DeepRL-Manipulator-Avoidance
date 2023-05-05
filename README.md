@@ -3,10 +3,11 @@
 
 This repository uses Open AI Gym along with Webots phyisics simulation to control a 7 DOF Kinova manipulator robot path movement towards a desired goal with obstacle avoidance, using reinforcement learning.
 
+![](RL.gif)
+
 ### To-Do
 - Currently avoidance is only applied to the manipulator end effector, subsequent joints do not avoid accordingly. 
 
-![](RL.gif)
 
 ## Prerequisites
 
